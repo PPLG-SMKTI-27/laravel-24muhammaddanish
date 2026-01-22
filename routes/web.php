@@ -12,9 +12,7 @@ Route::get('/about', function () {
     return view('portofolio.about');
 });
 
-Route::get('/projects', function () {
-    return view('portofolio.projects');
-});
+Route::get('/projects', [ProjectController::class, 'projects']);
 
 // Example route - Show name parameter
 Route::get('/tampilkan-nama/{nama}', [ProjectController::class, 'tampilkanNama']);

@@ -27,4 +27,33 @@ class ProjectController extends Controller
             'nama' => $nama
         ]);
     }
+
+    /**
+     * Show projects page.
+     */
+    public function projects(): View
+    {
+        $projects = [
+            [
+                'name' => 'E-Commerce Platform',
+                'description' => 'Platform e-commerce modern dengan fitur lengkap seperti keranjang belanja, pembayaran, dan manajemen inventori.'
+            ],
+            [
+                'name' => 'Blog Management System',
+                'description' => 'Sistem manajemen blog dengan fitur CRUD, kategorisasi, dan komentar user.'
+            ],
+            [
+                'name' => 'Task Management App',
+                'description' => 'Aplikasi manajemen tugas dengan fitur kolaborasi tim dan tracking progress.'
+            ],
+             [
+                'name' => 'Task Management App',
+                'description' => 'Aplikasi manajemen tugas dengan fitur kolaborasi tim dan tracking progress.'
+            ]
+        ];
+
+        return view('projects', [
+            'projects' => $projects
+        ]);
+    }
 }
