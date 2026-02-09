@@ -941,38 +941,77 @@
         </div>
 
         <!-- Projects Grid -->
-        <div class="projects-grid" id="projectsContainer">
-            @forelse($projects as $project)
-                <div class="project-card" data-category="{{ $project['category'] }}">
-                    <div class="project-img">
-                        <div class="project-tag">{{ ucfirst($project['filter_category']) }}</div>
-                        <i class="{{ $project['icon'] }}"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>{{ $project['title'] }}</h3>
-                        <p>{{ $project['description'] }}</p>
-                        <div class="project-tech">
-                            @foreach($project['technologies'] as $tech)
-                                <span class="tech-tag">{{ $tech }}</span>
-                            @endforeach
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link" data-project="{{ $project['id'] }}">
-                                <i class="fas fa-external-link-alt"></i> Lihat Detail
-                            </a>
-                            <a href="{{ $project['source_url'] }}" target="_blank" class="project-link outline">
-                                <i class="fab fa-github"></i> Kode Sumber
-                            </a>
-                        </div>
-                    </div>
+       <div class="projects-grid" id="projectsContainer">
+    <div class="projects-grid">
+    @forelse ($projects as $project)
+        <div class="project-card" data-category="{{ $project->category }}">
+            
+            {{-- Image / Icon --}}
+            <div class="project-img">
+                <i class="{{ $project->icon ?? 'fas fa-code' }}"></i>
+
+                @if($project->tag)
+                    <span class="project-tag">{{ $project->tag }}</span>
+                @endif
+            </div>
+
+            {{-- Info --}}
+            <div class="project-info">
+                
+                {{-- Category --}}
+                <div class="project-category">
+                    <i class="{{ $project->icon ?? 'fas fa-folder' }}"></i>
+                    {{ ucfirst($project->category) }}
                 </div>
-            @empty
-                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
-                    <p style="color: var(--gray); font-size: 1.1rem;">Belum ada proyek yang ditampilkan.</p>
+
+                {{-- Title --}}
+                <h3 class="project-title">
+                    {{ $project->title }}
+                </h3>
+
+                {{-- Description --}}
+                <p class="project-description">
+                    {{ $project->description }}
+                </p>
+
+                {{-- Technologies --}}
+                @if(is_array($project->technologies))
+                    <div class="project-tech">
+                        @foreach ($project->technologies as $tech)
+                            <span class="tech-tag">{{ $tech }}</span>
+                        @endforeach
+                    </div>
+                @endif
+
+                {{-- Footer / Buttons --}}
+                <div class="project-footer">
+                    @if($project->demo_url)
+                        <a href="{{ $project->demo_url }}" target="_blank" class="project-btn project-btn-primary">
+                            <i class="fas fa-external-link-alt"></i> Demo
+                        </a>
+                    @endif
+
+                    @if($project->source_url)
+                        <a href="{{ $project->source_url }}" target="_blank" class="project-btn project-btn-secondary">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    @endif
                 </div>
-            @endforelse
+            </div>
         </div>
+    @empty
+        <p style="grid-column:1/-1;text-align:center;color:#64748b;">
+            Belum ada project 😴
+        </p>
+    @endforelse
+</div>
+
+      
     </div>
+
+
+</div>
+
 
     <!-- CTA Section -->
     <section class="cta-section">

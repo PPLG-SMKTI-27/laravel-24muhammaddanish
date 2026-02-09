@@ -1,3 +1,7 @@
+
+@php
+dd($project);
+@endphp
 <!DOCTYPE html>
 <html lang="id">
 <head>
